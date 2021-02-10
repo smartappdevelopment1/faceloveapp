@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "929549220142",
+    "firebase_url": "https://facelove-f2510.firebaseio.com",
+    "project_id": "facelove-f2510",
+    "storage_bucket": "facelove-f2510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929549220142:android:aa758640f9c1ce796622bf",
+        "android_client_info": {
+          "package_name": "com.saurabhinfosys.facelove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929549220142-qbsl3icuiplldc738u84rr6gtidoinuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saurabhinfosys.facelove",
+            "certificate_hash": "53c648566d7cecd0fc6e5d24e7b5e3b9fefd3a63"
+          }
+        },
+        {
+          "client_id": "929549220142-q2t7c0sdnr50ns8h4hk1iga12t1s2u59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOMfL_i5spFcWUu_rKAX-us1myqEMEF18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929549220142-q2t7c0sdnr50ns8h4hk1iga12t1s2u59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
