@@ -87,14 +87,15 @@ class _SearchLocationState extends State<SearchLocation> {
                                             padding:
                                                 const EdgeInsets.only(top: 80),
                                             child: MapBoxPlaceSearchWidget(
-                                              language: 'en',
+
+
                                               popOnSelect: true,
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
                                                   .5,
                                               apiKey: _mapboxApi,
-                                              limit: 10,
+                                            
                                               searchHint:
                                                   'Enter your city name',
                                               onSelected: (place) {

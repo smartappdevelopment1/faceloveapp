@@ -21,6 +21,7 @@ import 'Home.dart';
 import 'package:hookup4u/util/color.dart';
 
 import 'Calling/incomingCall.dart';
+import 'Profile/EditProfile.dart';
 
 List likedByList = [];
 
@@ -157,7 +158,9 @@ class TabbarState extends State<Tabbar> {
 
   configurePushNotification(User user) {
 
-    _firebaseMessaging.requestNotificationPermissions();
+    _firebaseMessaging.requestNotificationPermissions(
+
+    );
 
     _firebaseMessaging.getToken().then((token) {
       print(token);
@@ -269,6 +272,24 @@ class TabbarState extends State<Tabbar> {
       if (!isPuchased) {
         _getSwipedcount();
       }
+
+
+      if(currentUser.imageUrl.isEmpty){
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) =>
+                    EditProfile(currentUser)));
+      }else if(currentUser.imageUrl.length==1){
+        if(currentUser.imageUrl[0]=="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUC64VZctJ0un9UBnbUKtj-blhw02PeDEQIMOqovc215LWYKu&s"){
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (context) =>
+                      EditProfile(currentUser)));
+        }
+      }
+
       return currentUser;
     });
   }
@@ -445,7 +466,7 @@ class TabbarState extends State<Tabbar> {
                             Center(child: Notifications(currentUser)),
                             Center(
                                 child: HomeScreen(
-                                    currentUser, matches, newmatches)),
+                                    currentUser, matches, newmatches,items)),
                           ],
                           physics: NeverScrollableScrollPhysics(),
                         )),

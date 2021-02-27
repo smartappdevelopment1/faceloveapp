@@ -73,37 +73,154 @@ class RecentChats extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 10.0),
                                     decoration: BoxDecoration(
-                                      color: snapshot.data.documents[0]
-                                                      ['sender_id'] !=
-                                                  currentUser.id &&
-                                              !snapshot.data.documents[0]
-                                                  ['isRead']
-                                          ? primaryColor.withOpacity(.1)
-                                          : secondryColor.withOpacity(.2),
+
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(20.0),
                                         bottomRight: Radius.circular(20.0),
                                       ),
                                     ),
-                                    child: ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundColor: secondryColor,
-                                        radius: 30.0,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(90),
-                                          child: CachedNetworkImage(
-                                            imageUrl: index.imageUrl[0],
-                                            useOldImageOnUrlChange: true,
-                                            placeholder: (context, url) =>
-                                                CupertinoActivityIndicator(
-                                              radius: 15,
+                                    child: 0==0? Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: CachedNetworkImageProvider(index.imageUrl[0]),
+                                                  fit: BoxFit.cover,
+
+                                                ),
+                                                borderRadius: BorderRadius.circular(100),
+
+                                              ),
+                                              width: 50,
+                                              height: 50,
+
+
+
                                             ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Icon(Icons.error),
-                                          ),
+                                            SizedBox(width: 15,),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  index.name,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 05,),
+                                                Text(
+                                                  snapshot.data.documents[0]['image_url']
+                                                      .toString()
+                                                      .length >
+                                                      0
+                                                      ? "$photoText"
+                                                      : snapshot.data.documents[0]
+                                                  ['text'],
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 12.0,
+
+                                                  ),
+                                                  overflow: TextOverflow.ellipsis,
+                                                )
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                              children: <Widget>[
+                                                Text(
+                                                  snapshot.data.documents[0]
+                                                  ["time"] !=
+                                                      null
+                                                      ? DateFormat.MMMd()
+                                                      .add_jm()
+                                                      .format(snapshot.data
+                                                      .documents[0]["time"]
+                                                      .toDate())
+                                                      .toString()
+                                                      : "",
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 10.0,
+
+                                                  ),
+                                                ),
+                                                snapshot.data.documents[0]
+                                                ['sender_id'] !=
+                                                    currentUser.id &&
+                                                    !snapshot.data.documents[0]
+                                                    ['isRead']
+                                                    ? Container(
+                                                  width: 40.0,
+                                                  height: 20.0,
+                                                  decoration: BoxDecoration(
+                                                    color: primaryColor,
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        30.0),
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    '$newText',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12.0,
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                )
+                                                    : Text(""),
+                                                snapshot.data.documents[0]
+                                                ['sender_id'] ==
+                                                    currentUser.id
+                                                    ? !snapshot.data.documents[0]
+                                                ['isRead']
+                                                    ? Icon(
+                                                  Icons.done,
+                                                  color: secondryColor,
+                                                  size: 15,
+                                                )
+                                                    : Icon(
+                                                  Icons.done_all,
+                                                  color: primaryColor,
+                                                  size: 15,
+                                                )
+                                                    : Text("")
+                                              ],
+                                            )
+                                          ],
                                         ),
+                                        SizedBox(height: 10,),
+                                        Divider(height: 0,thickness: 1,)
+
+                                      ],
+                                    ): ListTile(
+                                      leading: Container(
+
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(index.imageUrl[0]),
+                                            fit: BoxFit.cover,
+
+                                          ),
+                                          borderRadius: BorderRadius.circular(100),
+
+                                        ),
+                                        width: 40,
+                                        height: 40,
+
+
+
                                       ),
                                       title: Text(
                                         index.name,

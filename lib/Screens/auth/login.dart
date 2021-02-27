@@ -11,6 +11,8 @@ import 'package:hookup4u/Screens/auth/otp.dart';
 import 'package:hookup4u/models/custom_web_view.dart';
 import 'package:hookup4u/util/color.dart';
 import 'package:hookup4u/util/strings.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatelessWidget {
@@ -20,7 +22,7 @@ class Login extends StatelessWidget {
       'https://facelove-f2510.firebaseapp.com/__/auth/handler';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  bool dropdownValue = GlobalString.isEnglish;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,6 +41,7 @@ class Login extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: <Widget>[
+
                   ClipPath(
                     clipper: WaveClipper2(),
                     child: Container(
@@ -86,6 +89,43 @@ class Login extends StatelessWidget {
                               colors: [primaryColor, primaryColor])),
                     ),
                   ),
+                  Positioned(
+                    bottom:70,
+                    right: 30,
+                    child: DropdownButton<bool>(
+                      value: dropdownValue,
+                      icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.white,),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.white),
+                      underline: Container(
+                        height: 0,
+                        color: Colors.white,
+                      ),
+                      onChanged: (bool val) async {
+                          dropdownValue = val;
+
+                          GlobalString.isEnglish=val;
+                          SharedPreferences pref = await SharedPreferences.getInstance();
+                          await  pref.setBool("eng", GlobalString.isEnglish);
+                          print(GlobalString.isEnglish);
+
+
+
+                          (context as Element).markNeedsBuild();
+                          toast(reopen,duration: Duration(milliseconds: 1500));
+                      },
+                      items:[
+                        DropdownMenuItem(
+                          child: Text("English",style: TextStyle(color: Colors.black),),
+                          value: true,
+                        ),
+                        DropdownMenuItem(
+                            child: Text("French",style: TextStyle(color: Colors.black)), value: false),
+
+                      ],
+                    ),
+                  )
                 ],
               ),
               Column(children: <Widget>[
@@ -132,7 +172,7 @@ class Login extends StatelessWidget {
                         onTap: () async {
                           showDialog(
                               context: context,
-                              child: Container(
+                              builder:(_)=> Container(
                                   height: 30,
                                   width: 30,
                                   child: Center(

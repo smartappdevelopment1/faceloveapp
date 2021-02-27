@@ -69,11 +69,16 @@ class _CardPicturesState extends State<CardPictures>
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: secondryColor,
-                                          radius: 40,
+                                      GestureDetector(
+                                        onTap:(){
+                                       //   showMatch(userImage: widget.currentUser.imageUrl[0]);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircleAvatar(
+                                            backgroundColor: secondryColor,
+                                            radius: 40,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -324,7 +329,8 @@ class _CardPicturesState extends State<CardPictures>
                                         SwiperPosition.Right) {
                                       if (likedByList
                                           .contains(widget.users[index].id)) {
-                                        showDialog(
+
+                                      /*  showDialog(
                                             context: context,
                                             builder: (ctx) {
                                               Future.delayed(
@@ -344,7 +350,7 @@ class _CardPicturesState extends State<CardPictures>
                                                       width: 300,
                                                       child: Center(
                                                         child: Text(
-                                                          "$itsAMatchWithText ${widget.users[index].name}",
+                                                          "$itsAMatchWithText ${widget.users[index].name} with ${widget.currentUser.imageUrl[0]} ",
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
@@ -360,7 +366,10 @@ class _CardPicturesState extends State<CardPictures>
                                                   ),
                                                 ),
                                               );
-                                            });
+                                            });*/
+
+                                        showMatch(userImage: widget.users[index].imageUrl[0]);
+
                                         await docRef
                                             .document(widget.currentUser.id)
                                             .collection("Matches")
@@ -596,4 +605,111 @@ class _CardPicturesState extends State<CardPictures>
       ),
     );
   }
+
+
+  showMatch({String userImage}){
+    showDialog(
+        context: context,
+        builder: (ctx) {
+
+          return Container(
+            color: primaryColor,
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(onTap: (){
+                          Navigator.pop(ctx);
+                        },child: Icon(Icons.close,size: MediaQuery.of(context).size.width*0.06,color: Colors.white,)),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: Stack(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RotationTransition(
+                          turns:new AlwaysStoppedAnimation(-15 / 360),
+                          child: Center(
+                            child: Padding(
+                              padding:  EdgeInsets.only(right:MediaQuery.of(context).size.width*0.275),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.3,
+                                height: MediaQuery.of(context).size.width*0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),color: Colors.white,border: Border.all(width: 3,color: Colors.white),
+          image: DecorationImage(
+          image: CachedNetworkImageProvider(widget.currentUser.imageUrl[0]),
+          fit: BoxFit.cover
+          )
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        RotationTransition(
+                          turns:new AlwaysStoppedAnimation(15 / 360),
+                          child: Center(
+                            child: Padding(
+                              padding:EdgeInsets.only(left:MediaQuery.of(context).size.width*0.275),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.3,
+                                height: MediaQuery.of(context).size.width*0.3,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),color: Colors.white,border: Border.all(width: 3,color: Colors.white),
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(userImage),
+                                    fit: BoxFit.cover
+                                  )
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(top:MediaQuery.of(context).size.width*0.3),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width*0.15,
+                              height: MediaQuery.of(context).size.width*0.15,
+
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  image: DecorationImage(
+                                    image: AssetImage("asset/Icon/icon.png"),
+                                  )
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(ctx);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Material(child: Text("Keep Swiping")),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.width*0.1,)
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
 }

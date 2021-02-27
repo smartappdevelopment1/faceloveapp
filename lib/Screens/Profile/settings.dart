@@ -128,6 +128,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           ListTile(
                             title: DropdownButton(
+
                               iconEnabledColor: primaryColor,
                               iconDisabledColor: secondryColor,
                               isExpanded: true,

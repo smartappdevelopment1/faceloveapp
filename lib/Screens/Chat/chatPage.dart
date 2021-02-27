@@ -141,64 +141,75 @@ class _ChatPageState extends State<ChatPage> {
                         );
                       },
                     )
-                  : Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 10.0),
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      margin: EdgeInsets.only(
-                          top: 8.0, bottom: 8.0, left: 80.0, right: 10),
-                      decoration: BoxDecoration(
-                          color: primaryColor.withOpacity(.1),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              documentSnapshot.data['text'],
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                  : Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical:15.0),
+
+                          margin: EdgeInsets.only(
+                              top: 8.0, bottom: 8.0, left: 80.0, right: 10),
+                          decoration: BoxDecoration(
+                              color: primaryColor,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(0),
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(15)
+                              ),),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                documentSnapshot.data["time"] != null
-                                    ? DateFormat.MMMd()
-                                        .add_jm()
-                                        .format(documentSnapshot
-                                            .data["time"]
-                                            .toDate())
-                                        .toString()
-                                    : "",
-                                style: TextStyle(
-                                  color: secondryColor,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.w600,
+                              Container(
+                                child: Text(
+                                  documentSnapshot.data['text'],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              documentSnapshot.data['isRead'] == false
-                                  ? Icon(
-                                      Icons.done,
-                                      color: secondryColor,
-                                      size: 15,
-                                    )
-                                  : Icon(
-                                      Icons.done_all,
-                                      color: primaryColor,
-                                      size: 15,
-                                    )
+
                             ],
+                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            documentSnapshot.data["time"] != null
+                                ? DateFormat.MMMd()
+                                .add_jm()
+                                .format(documentSnapshot
+                                .data["time"]
+                                .toDate())
+                                .toString()
+                                : "",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.w300,
+                            ),
                           ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          documentSnapshot.data['isRead'] == false
+                              ? Icon(
+                            Icons.done,
+                            color: secondryColor,
+                            size: 15,
+                          )
+                              : Icon(
+                            Icons.done_all,
+                            color: primaryColor,
+                            size: 15,
+                          )
                         ],
-                      )),
+                      ),
+                    ],
+                  ),
             ),
           ],
         ),
@@ -208,7 +219,7 @@ class _ChatPageState extends State<ChatPage> {
 
   _messagesIsRead(documentSnapshot) {
     return <Widget>[
-      Column(
+    /*  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           InkWell(
@@ -235,7 +246,7 @@ class _ChatPageState extends State<ChatPage> {
                 }),
           ),
         ],
-      ),
+      ),*/
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,50 +304,62 @@ class _ChatPageState extends State<ChatPage> {
                         ));
                       },
                     )
-                  : Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 10.0),
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0, right: 10),
-                      decoration: BoxDecoration(
-                          color: secondryColor.withOpacity(.3),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
+                  : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 10.0),
 
-                            child: Text(
-                              documentSnapshot.data['text'],
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          margin: EdgeInsets.only(top: 8.0, bottom: 8.0, right: 10),
+                          decoration: BoxDecoration(
+                              color: secondryColor,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                                topLeft: Radius.circular(15)
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                             ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                documentSnapshot.data["time"] != null
-                                    ? DateFormat.MMMd()
-                                        .add_jm()
-                                        .format(documentSnapshot
-                                            .data["time"]
-                                            .toDate())
-                                        .toString()
-                                    : "",
-                                style: TextStyle(
-                                  color: secondryColor,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.w600,
+                              Container(
+
+                                child: Text(
+                                  documentSnapshot.data['text'],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               ),
+
                             ],
+                          )),
+                      Row(
+
+                        children: <Widget>[
+                          Text(
+                            documentSnapshot.data["time"] != null
+                                ? DateFormat.MMMd()
+                                .add_jm()
+                                .format(documentSnapshot
+                                .data["time"]
+                                .toDate())
+                                .toString()
+                                : "",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.w300,
+                            ),
                           ),
                         ],
-                      )),
+                      ),
+                    ],
+                  ),
             ),
           ],
         ),
@@ -389,7 +412,36 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          title: Text(widget.second.name),
+          title: Row(
+            children: [
+              InkWell(
+                child: CircleAvatar(
+                  backgroundColor: secondryColor,
+                  radius: 20.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(90),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.second.imageUrl[0],
+                      useOldImageOnUrlChange: true,
+                      placeholder: (context, url) => CupertinoActivityIndicator(
+                        radius: 15,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
+                ),
+                onTap: () => showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) {
+                      return Info(widget.second, widget.sender, null);
+                    }),
+              ),
+              SizedBox(width:15),
+
+              Text(widget.second.name),
+            ],
+          ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.white,
@@ -531,7 +583,8 @@ class _ChatPageState extends State<ChatPage> {
       ),
       color: primaryColor,
       onPressed: _isWritting
-          ? () => _sendText(_textController.text.trimRight())
+          ? (){
+        if(_textController.text!=""){_sendText(_textController.text.trimRight());}}
           : null,
     );
   }

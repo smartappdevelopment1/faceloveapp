@@ -155,7 +155,7 @@ class Info extends StatelessWidget {
                                     color: primaryColor,
                                   ),
                                   title: Text(
-                                    "${user.editInfo['DistanceVisible'] != null ? user.editInfo['DistanceVisible'] ? '${lessThanKmAwayText.replaceAll("_", user.distanceBW)}' : '$distanceNotVisibleText' : '${lessThanKmAwayText.replaceAll("_", user.distanceBW)}'}",
+                                    "${user.editInfo['DistanceVisible'] != null ? user.editInfo['DistanceVisible'] ? '${lessThanKmAwayText.replaceAll("_", user.distanceBW)}' : '$distanceNotVisibleText' : '${lessThanKmAwayText.replaceAll("_", user.distanceBW.toString())}'}",
                                     style: TextStyle(
                                         color: secondryColor,
                                         fontSize: 16,

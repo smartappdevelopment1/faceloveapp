@@ -42,8 +42,8 @@ class _MyAppState extends State<MyApp> {
   Future _checkAuth() async {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    GlobalString.isEnglish = preferences.getBool("eng")??true;
-    isEnglish = preferences.getBool("eng")??true;
+    GlobalString.isEnglish = (preferences.getBool("eng")??true);
+    isEnglish = (preferences.getBool("eng")??true);
 
 
     final FirebaseAuth _auth = FirebaseAuth.instance;

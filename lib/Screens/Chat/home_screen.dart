@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   final User currentUser;
   final List<User> matches;
   final List<User> newmatches;
-  HomeScreen(this.currentUser, this.matches, this.newmatches);
+  final Map items;
+  HomeScreen(this.currentUser, this.matches, this.newmatches,this.items);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -64,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Matches(widget.currentUser, widget.newmatches),
-                Divider(),
+                Matches(widget.currentUser, widget.newmatches,widget.items),
+                Divider(height: 0,),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     '$recentMessageText',
                     style: TextStyle(
